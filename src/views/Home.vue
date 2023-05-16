@@ -20,4 +20,4 @@ const redirectToTeaDetails = (teaSlug: string) => {
 const teaData = ref(teaJson);
 </script>
 
-<!-- component lifecycle VUE - poczytac -->
+<!-- component lifecycle VUE - poczytac  -->
