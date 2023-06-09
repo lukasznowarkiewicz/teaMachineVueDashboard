@@ -1,6 +1,7 @@
 #include "setup.h"
 #include "definitions.h"
 #include "Adafruit_PCF8575.h" // library for IO expanders on I2C line
+Adafruit_PCF8575 pcf2;
 void setupGPIOPins() {
     // setup for GPIOs diretly connected to PICO
     pinMode(waterHeater1, OUTPUT);
@@ -86,4 +87,84 @@ void setupRightExpander(){
     pinMode(hosesActuatorRL, OUTPUT);
     pinMode(hosesActuatorRR, OUTPUT);
     pinMode(peltierModule, OUTPUT);
+}
+
+void setAllOFF(){
+    digitalWrite(waterHeater1, LOW);
+    digitalWrite(waterHeater2, LOW);
+    digitalWrite(waterPump1, LOW);
+    digitalWrite(waterPump2, LOW);
+    
+    pcf2.begin(0x20, &Wire);
+    digitalWrite(OUT1_screw1RL, LOW);
+    digitalWrite(OUT2_screw1RR, LOW);
+    digitalWrite(OUT3_screw2RL, LOW);
+    digitalWrite(OUT4_screw2RR, LOW);
+    digitalWrite(OUT5_screw3RL, LOW);
+    digitalWrite(OUT6_screw3RR, LOW);
+    digitalWrite(OUT7_screw4RL, LOW);
+    digitalWrite(OUT8_screw4RR, LOW);
+    digitalWrite(Future_O5, LOW);
+    digitalWrite(Future_O6, LOW);
+
+    pcf2.begin(0x21, &Wire);
+    digitalWrite(OUT1_pump1, LOW);
+    digitalWrite(OUT2_pump2, LOW);
+    digitalWrite(OUT3_pump3, LOW);
+    digitalWrite(OUT4_pump4, LOW);
+    digitalWrite(OUT5_pump5, LOW);
+    digitalWrite(OUT5_pump6, LOW);
+    digitalWrite(Future_O1, LOW);
+
+    pcf2.begin(0x23, &Wire);
+    digitalWrite(Future_O2, LOW);
+    digitalWrite(Future_O3, LOW);
+    digitalWrite(Future_O4, LOW);
+    digitalWrite(Future_rel1, LOW);
+    digitalWrite(ultrasonicAccelerator, LOW);
+    digitalWrite(compressor, LOW);
+    digitalWrite(hosesActuatorRL, LOW);
+    digitalWrite(hosesActuatorRR, LOW);
+    digitalWrite(peltierModule, LOW);
+    Serial.println("Set all OUTs OFF");
+}
+
+void setAllON() {
+    digitalWrite(waterHeater1, HIGH);
+    digitalWrite(waterHeater2, HIGH);
+    digitalWrite(waterPump1, HIGH);
+    digitalWrite(waterPump2, HIGH);
+    
+    pcf2.begin(0x20, &Wire);
+    digitalWrite(OUT1_screw1RL, HIGH);
+    digitalWrite(OUT2_screw1RR, HIGH);
+    digitalWrite(OUT3_screw2RL, HIGH);
+    digitalWrite(OUT4_screw2RR, HIGH);
+    digitalWrite(OUT5_screw3RL, HIGH);
+    digitalWrite(OUT6_screw3RR, HIGH);
+    digitalWrite(OUT7_screw4RL, HIGH);
+    digitalWrite(OUT8_screw4RR, HIGH);
+    digitalWrite(Future_O5, HIGH);
+    digitalWrite(Future_O6, HIGH);
+    
+    pcf2.begin(0x21, &Wire);
+    digitalWrite(OUT1_pump1, HIGH);
+    digitalWrite(OUT2_pump2, HIGH);
+    digitalWrite(OUT3_pump3, HIGH);
+    digitalWrite(OUT4_pump4, HIGH);
+    digitalWrite(OUT5_pump5, HIGH);
+    digitalWrite(OUT5_pump6, HIGH);
+    digitalWrite(Future_O1, HIGH);
+    
+    pcf2.begin(0x23, &Wire);
+    digitalWrite(Future_O2, HIGH);
+    digitalWrite(Future_O3, HIGH);
+    digitalWrite(Future_O4, HIGH);
+    digitalWrite(Future_rel1, HIGH);
+    digitalWrite(ultrasonicAccelerator, HIGH);
+    digitalWrite(compressor, HIGH);
+    digitalWrite(hosesActuatorRL, HIGH);
+    digitalWrite(hosesActuatorRR, HIGH);
+    digitalWrite(peltierModule, HIGH);
+    Serial.println("Set all OUTs ON");
 }

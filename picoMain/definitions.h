@@ -1,5 +1,5 @@
 // GPIOs definitions
-#define waterHeater1 1
+#define waterHeater1 17
 #define waterHeater2 2
 #define waterPump1 3
 #define waterPump2 4
