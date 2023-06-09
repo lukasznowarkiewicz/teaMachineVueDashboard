@@ -27,14 +27,14 @@
 #define Future_A3 26
 
 // Left IO expander
-#define OUT1_screw1RL 0
-#define OUT2_screw1RR 1
-#define OUT3_screw2RL 2
-#define OUT4_screw2RR 3
-#define OUT5_screw3RL 4
-#define OUT6_screw3RR 5
-#define OUT7_screw4RL 6
-#define OUT8_screw4RR 7
+#define liquidConveyor1 0
+#define liquidConveyor2 1
+#define liquidConveyor3 2
+#define liquidConveyor4 3
+#define liquidConveyor5 4
+#define liquidConveyor6 5
+#define screwConveyor3 6
+#define screwConveyor4 7
 #define screwFeederLvl1 8
 #define screwFeederLvl2 9
 #define screwFeederLvl3 10

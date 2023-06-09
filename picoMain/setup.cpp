@@ -26,6 +26,7 @@ void setupGPIOPins() {
     pinMode(sugarServo1, OUTPUT); // dla PWM
     pinMode(sugarServo2, OUTPUT); // dla PWM
 //    pinMode(ingridServo, OUTPUT); // dla PWM // temporarly disabled due to stability issues
+    pinMode(22, INPUT);
     pinMode(sugarLvl1, INPUT);
     pinMode(Future_A1, INPUT);
     pinMode(Future_A2, INPUT);
@@ -33,80 +34,127 @@ void setupGPIOPins() {
 }
 
 void setupLeftExpander(){
-    pinMode(OUT1_screw1RL, OUTPUT);
-    pinMode(OUT2_screw1RR, OUTPUT);
-    pinMode(OUT3_screw2RL, OUTPUT);
-    pinMode(OUT4_screw2RR, OUTPUT);
-    pinMode(OUT5_screw3RL, OUTPUT);
-    pinMode(OUT6_screw3RR, OUTPUT);
-    pinMode(OUT7_screw4RL, OUTPUT);
-    pinMode(OUT8_screw4RR, OUTPUT);
-    pinMode(screwFeederLvl1, INPUT);
-    pinMode(screwFeederLvl2, INPUT);
-    pinMode(screwFeederLvl3, INPUT);
-    pinMode(screwFeederLvl4, INPUT);
-    pinMode(dripTrayLvl, INPUT);
-    pinMode(cupSensor, INPUT);
-    pinMode(Future_O5, OUTPUT);
-    pinMode(Future_O6, OUTPUT);
+    pcf2.begin(0x20, &Wire);
+    pcf2.pinMode(liquidConveyor1, OUTPUT);
+    pcf2.pinMode(liquidConveyor1, OUTPUT);
+    pcf2.pinMode(liquidConveyor2, OUTPUT);
+    pcf2.pinMode(liquidConveyor3, OUTPUT);
+    pcf2.pinMode(liquidConveyor4, OUTPUT);
+    pcf2.pinMode(liquidConveyor5, OUTPUT);
+    pcf2.pinMode(liquidConveyor6, OUTPUT);
+    pcf2.pinMode(screwConveyor3, OUTPUT);
+    pcf2.pinMode(screwConveyor4, OUTPUT);
+    pcf2.pinMode(screwFeederLvl1, INPUT);
+    pcf2.pinMode(screwFeederLvl2, INPUT);
+    pcf2.pinMode(screwFeederLvl3, INPUT);
+    pcf2.pinMode(screwFeederLvl4, INPUT);
+    pcf2.pinMode(dripTrayLvl, INPUT);
+    pcf2.pinMode(cupSensor, INPUT);
+    pcf2.pinMode(Future_O5, OUTPUT);
+    pcf2.pinMode(Future_O6, OUTPUT);
   }
 
 void setupTopExpander(){
-    pinMode(OUT1_pump1, OUTPUT);
-    pinMode(OUT2_pump2, OUTPUT);
-    pinMode(OUT3_pump3, OUTPUT);
-    pinMode(OUT4_pump4, OUTPUT);
-    pinMode(OUT5_pump5, OUTPUT);
-    pinMode(OUT5_pump6, OUTPUT);
-    pinMode(liquidLvl1, INPUT);
-    pinMode(liquidLvl2, INPUT);
-    pinMode(liquidLvl3, INPUT);
-    pinMode(liquidLvl4, INPUT);
-    pinMode(liquidLvl5, INPUT);
-    pinMode(liquidLvl6, INPUT);
-    pinMode(waterTankLvl1, INPUT);
-    pinMode(waterTankLvl2, INPUT);
-    pinMode(wasteTankLvl, INPUT);
-    pinMode(Future_I0, INPUT);
+    pcf2.begin(0x21, &Wire);
+    pcf2.pinMode(OUT1_pump1, OUTPUT);
+    pcf2.pinMode(OUT2_pump2, OUTPUT);
+    pcf2.pinMode(OUT3_pump3, OUTPUT);
+    pcf2.pinMode(OUT4_pump4, OUTPUT);
+    pcf2.pinMode(OUT5_pump5, OUTPUT);
+    pcf2.pinMode(OUT5_pump6, OUTPUT);
+    pcf2.pinMode(liquidLvl1, INPUT);
+    pcf2.pinMode(liquidLvl2, INPUT);
+    pcf2.pinMode(liquidLvl3, INPUT);
+    pcf2.pinMode(liquidLvl4, INPUT);
+    pcf2.pinMode(liquidLvl5, INPUT);
+    pcf2.pinMode(liquidLvl6, INPUT);
+    pcf2.pinMode(waterTankLvl1, INPUT);
+    pcf2.pinMode(waterTankLvl2, INPUT);
+    pcf2.pinMode(wasteTankLvl, INPUT);
+    pcf2.pinMode(Future_I0, INPUT);
+
 }
 
 void setupRightExpander(){
-    pinMode(Future_I1, INPUT);
-    pinMode(Future_I2, INPUT);
-    pinMode(Future_I3, INPUT);
-    pinMode(Future_I4, INPUT);
-    pinMode(Future_I5, INPUT);
-    pinMode(Future_I6, INPUT);
-    pinMode(Future_O1, OUTPUT);
-    pinMode(Future_O2, OUTPUT);
-    pinMode(Future_O3, OUTPUT);
-    pinMode(Future_O4, OUTPUT);
-    pinMode(Future_rel1, OUTPUT);
-    pinMode(ultrasonicAccelerator, OUTPUT);
-    pinMode(compressor, OUTPUT);
-    pinMode(hosesActuatorRL, OUTPUT);
-    pinMode(hosesActuatorRR, OUTPUT);
-    pinMode(peltierModule, OUTPUT);
+    pcf2.begin(0x23, &Wire);
+    pcf2.pinMode(Future_I1, INPUT);
+    pcf2.pinMode(Future_I2, INPUT);
+    pcf2.pinMode(Future_I3, INPUT);
+    pcf2.pinMode(Future_I4, INPUT);
+    pcf2.pinMode(Future_I5, INPUT);
+    pcf2.pinMode(Future_I6, INPUT);
+    pcf2.pinMode(Future_O1, OUTPUT);
+    pcf2.pinMode(Future_O2, OUTPUT);
+    pcf2.pinMode(Future_O3, OUTPUT);
+    pcf2.pinMode(Future_O4, OUTPUT);
+    pcf2.pinMode(Future_rel1, OUTPUT);
+    pcf2.pinMode(ultrasonicAccelerator, OUTPUT);
+    pcf2.pinMode(compressor, OUTPUT);
+    pcf2.pinMode(hosesActuatorRL, OUTPUT);
+    pcf2.pinMode(hosesActuatorRR, OUTPUT);
+    pcf2.pinMode(peltierModule, OUTPUT);
+
 }
 
-void setAllOFF(){
+void setAllOFF() {
+    digitalWrite(waterHeater1, HIGH);
+    digitalWrite(waterHeater2, HIGH);
+    digitalWrite(waterPump1, HIGH);
+    digitalWrite(waterPump2, HIGH);
+
+    pcf2.begin(0x20, &Wire);
+    pcf2.digitalWrite(liquidConveyor1, HIGH);
+    pcf2.digitalWrite(liquidConveyor2, HIGH);
+    pcf2.digitalWrite(liquidConveyor3, HIGH);
+    pcf2.digitalWrite(liquidConveyor4, HIGH);
+    pcf2.digitalWrite(liquidConveyor5, HIGH);
+    pcf2.digitalWrite(liquidConveyor6, HIGH);
+    pcf2.digitalWrite(screwConveyor3, HIGH);
+    pcf2.digitalWrite(screwConveyor4, HIGH);
+    pcf2.digitalWrite(Future_O5, HIGH);
+    pcf2.digitalWrite(Future_O6, HIGH);
+
+    pcf2.begin(0x21, &Wire);
+    pcf2.digitalWrite(OUT1_pump1, HIGH);
+    pcf2.digitalWrite(OUT2_pump2, HIGH);
+    pcf2.digitalWrite(OUT3_pump3, HIGH);
+    pcf2.digitalWrite(OUT4_pump4, HIGH);
+    pcf2.digitalWrite(OUT5_pump5, HIGH);
+    pcf2.digitalWrite(OUT5_pump6, HIGH);
+    pcf2.digitalWrite(Future_O1, HIGH);
+
+    pcf2.begin(0x23, &Wire);
+    pcf2.digitalWrite(Future_O2, HIGH);
+    pcf2.digitalWrite(Future_O3, HIGH);
+    pcf2.digitalWrite(Future_O4, HIGH);
+    pcf2.digitalWrite(Future_rel1, HIGH);
+    pcf2.digitalWrite(ultrasonicAccelerator, HIGH);
+    pcf2.digitalWrite(compressor, HIGH);
+    pcf2.digitalWrite(hosesActuatorRL, HIGH);
+    pcf2.digitalWrite(hosesActuatorRR, HIGH);
+    pcf2.digitalWrite(peltierModule, HIGH);
+    Serial.println("Set all OUTs OFF");
+}
+
+
+void setAllON() {
     digitalWrite(waterHeater1, LOW);
     digitalWrite(waterHeater2, LOW);
     digitalWrite(waterPump1, LOW);
     digitalWrite(waterPump2, LOW);
     
     pcf2.begin(0x20, &Wire);
-    digitalWrite(OUT1_screw1RL, LOW);
-    digitalWrite(OUT2_screw1RR, LOW);
-    digitalWrite(OUT3_screw2RL, LOW);
-    digitalWrite(OUT4_screw2RR, LOW);
-    digitalWrite(OUT5_screw3RL, LOW);
-    digitalWrite(OUT6_screw3RR, LOW);
-    digitalWrite(OUT7_screw4RL, LOW);
-    digitalWrite(OUT8_screw4RR, LOW);
-    digitalWrite(Future_O5, LOW);
-    digitalWrite(Future_O6, LOW);
-
+    pcf2.digitalWrite(liquidConveyor1, LOW);
+    pcf2.digitalWrite(liquidConveyor2, LOW);
+    pcf2.digitalWrite(liquidConveyor3, LOW);
+    pcf2.digitalWrite(liquidConveyor4, LOW);
+    pcf2.digitalWrite(liquidConveyor5, LOW);
+    pcf2.digitalWrite(liquidConveyor6, LOW);
+    pcf2.digitalWrite(screwConveyor3, LOW);
+    pcf2.digitalWrite(screwConveyor4, LOW);
+    pcf2.digitalWrite(Future_O5, LOW);
+    pcf2.digitalWrite(Future_O6, LOW);
+    
     pcf2.begin(0x21, &Wire);
     digitalWrite(OUT1_pump1, LOW);
     digitalWrite(OUT2_pump2, LOW);
@@ -115,7 +163,7 @@ void setAllOFF(){
     digitalWrite(OUT5_pump5, LOW);
     digitalWrite(OUT5_pump6, LOW);
     digitalWrite(Future_O1, LOW);
-
+    
     pcf2.begin(0x23, &Wire);
     digitalWrite(Future_O2, LOW);
     digitalWrite(Future_O3, LOW);
@@ -126,45 +174,5 @@ void setAllOFF(){
     digitalWrite(hosesActuatorRL, LOW);
     digitalWrite(hosesActuatorRR, LOW);
     digitalWrite(peltierModule, LOW);
-    Serial.println("Set all OUTs OFF");
-}
-
-void setAllON() {
-    digitalWrite(waterHeater1, HIGH);
-    digitalWrite(waterHeater2, HIGH);
-    digitalWrite(waterPump1, HIGH);
-    digitalWrite(waterPump2, HIGH);
-    
-    pcf2.begin(0x20, &Wire);
-    digitalWrite(OUT1_screw1RL, HIGH);
-    digitalWrite(OUT2_screw1RR, HIGH);
-    digitalWrite(OUT3_screw2RL, HIGH);
-    digitalWrite(OUT4_screw2RR, HIGH);
-    digitalWrite(OUT5_screw3RL, HIGH);
-    digitalWrite(OUT6_screw3RR, HIGH);
-    digitalWrite(OUT7_screw4RL, HIGH);
-    digitalWrite(OUT8_screw4RR, HIGH);
-    digitalWrite(Future_O5, HIGH);
-    digitalWrite(Future_O6, HIGH);
-    
-    pcf2.begin(0x21, &Wire);
-    digitalWrite(OUT1_pump1, HIGH);
-    digitalWrite(OUT2_pump2, HIGH);
-    digitalWrite(OUT3_pump3, HIGH);
-    digitalWrite(OUT4_pump4, HIGH);
-    digitalWrite(OUT5_pump5, HIGH);
-    digitalWrite(OUT5_pump6, HIGH);
-    digitalWrite(Future_O1, HIGH);
-    
-    pcf2.begin(0x23, &Wire);
-    digitalWrite(Future_O2, HIGH);
-    digitalWrite(Future_O3, HIGH);
-    digitalWrite(Future_O4, HIGH);
-    digitalWrite(Future_rel1, HIGH);
-    digitalWrite(ultrasonicAccelerator, HIGH);
-    digitalWrite(compressor, HIGH);
-    digitalWrite(hosesActuatorRL, HIGH);
-    digitalWrite(hosesActuatorRR, HIGH);
-    digitalWrite(peltierModule, HIGH);
     Serial.println("Set all OUTs ON");
 }
